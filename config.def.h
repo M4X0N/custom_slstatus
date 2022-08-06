@@ -1,7 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
 /* interval between updates (in ms) */
-const unsigned int interval = 1000;
+//const unsigned int interval = 1000;
+const unsigned int interval = 5000;
+//const unsigned int interval = 10000;
 
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
@@ -64,6 +66,12 @@ static const char unknown_str[] = "n/a";
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
 static const struct arg args[] = {
-	/* function format          argument */
-	{ datetime, "%s",           "%F %T" },
+	/* function	format		argument */
+	{ cpu_perc,	"CPU: %3s%%",	NULL },
+	{ separator,	" | ",		NULL },
+	{ ram_perc,	"RAM: %3s%%",	NULL },
+	{ separator,	" | ",		NULL },
+	{ temp,		"T: %3s°",	"/sys/class/thermal/thermal_zone11/temp" },
+	{ separator,	" | ",		NULL },
+	{ datetime,	"%s",		"%a %F %R" },
 };
