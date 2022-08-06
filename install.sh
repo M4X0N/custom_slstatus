@@ -9,10 +9,8 @@ compfiles=("components/*.o"
 function clean
 {
 	for file in "${compfiles[@]}"; do
-		if [ -f $file ]; then
-			echo "Removing $file"
-			sudo 2>/dev/null 1>/dev/null rm $file
-		fi
+		echo "Removing $file"
+		sudo 2>/dev/null 1>/dev/null rm -f $file
 	done
 }
 
@@ -24,6 +22,8 @@ while getopts 'imu' OPTION; do
     i)
       echo "Make and install"
       make && sudo make clean install
+      pkill slstatus
+      slstatus &
       ;;
     m)
       echo "Make only"
